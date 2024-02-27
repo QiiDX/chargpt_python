@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyGPT Response</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+    <style>
+        code {
+            display: block;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>KeyGPT Response</h1>
+    <button id="fetchButton">Fetch Content</button>
+    <div id="responseContainer"> </div>
+
+    <script>
+        document.getElementById('fetchButton').addEventListener('click', function() {
+            // 使用JavaScript获取后端返回的内容并高亮展示
+            fetch('/keyGPT')
+                .then(response => response.text())
+                .then(data => {
+                    const responseContainer = document.getElementById('responseContainer');
+                    responseContainer.innerHTML = '<pre><code>'+data+'</code></pre>';
+                    hljs.highlightBlock(responseContainer);
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
+    </script>
+</body>
+</html>
